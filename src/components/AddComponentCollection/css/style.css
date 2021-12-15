@@ -1,0 +1,121 @@
+#xxx>span {
+    display: inline-block;
+    margin: 10px;
+    padding: 30px 60px;
+    background-color:aqua;
+    color: black;
+    font-size: 40px;
+    border-radius: 20px;
+    text-shadow: 0 0 20px rgba(0,0,0,0.3);
+    
+}
+.draggable-source--is-dragging {
+    visibility: hidden;
+}
+
+.imgstyle{
+    width:auto !important;
+    height:100px !important;
+}
+
+.producttextarea{
+height: 115px !important;
+}
+
+
+.Imgbockhover{
+    position: relative;
+}
+.Imgbockhover::before{
+    content: "";
+    background-color: white;
+    opacity: 0.5;
+    width: 100%; 
+    height: 100%;
+    position: absolute ;
+    }
+.Imgbockhover::after{
+    content: "X";
+    font-size:25px;
+    font-weight:bold;
+    background-color: red;
+    color: white;
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    /* line-height: 150px; */
+    position: absolute ;
+    right:calc(50% - 20px); 
+    top: calc(50% - 20px);
+    }
+
+.sizebockhover::after{
+    font-size:13px;
+    width: 20px; 
+    height: 20px;
+    right: 0px;; 
+    top: 0px;
+}
+.sizebockhover::before{
+    content: "";
+    background-color: white;
+    opacity: 0.5;
+    width: 0; 
+    height: 0;
+    position: absolute ;
+    }
+.sizebockhover::after:active{
+    background-color: black;
+}
+.zIndex{
+    z-index: 10;
+}
+
+
+.w-8{
+    width: 80px
+}
+
+.w-300{
+    width: 300px !important;
+}
+.w-500{
+    width: 500px !important;
+}
+minheiget{
+    height: 200px;
+}
+paramheight{
+    height: 60px !important;
+    width: 300px !important;
+}
+paramheightitems{
+    height: 60px !important;
+    width: 150px !important;
+}
+
+
+
+
+
+/* 
+.allimagescroll {
+    background-color: #eee;
+    width: 600px;
+    height: 100px;
+    border: 1px dotted black;
+    overflow-x: scroll; 
+}
+  
+ 
+.allimagescroll::-webkit-scrollbar {
+      display: none;
+  }
+  
+ 
+.allimagescroll {
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  
+  }
+  */
