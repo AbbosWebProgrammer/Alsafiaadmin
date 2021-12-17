@@ -16,8 +16,13 @@ import GetSubCategory from "../components/getComponentCollection/getSubCategory"
 import GetSubSubCategory from "../components/getComponentCollection/getSubSubCategory";
 import Brand from "../components/AddComponentCollection/brand";
 import ShoppingDayForHomePageCarousel from "../components/AddComponentCollection/ShoppingDayForHomePageCarousel";
+import GetShoppingDayForHomePageCarousel from "../components/getComponentCollection/getShoppingDayForHomePageCarousel";
 import MainPagePromoForHomePageSlider from "../components/AddComponentCollection/MainPagePromoForHomePageSlider";
+import GetMainPagePromoForHomePageSlider from "../components/getComponentCollection/getMainPagePromoForHomePageSlider";
+
 import MainPagePromoForHomePage from "../components/AddComponentCollection/MainPagePromoForHomePage";
+import GetMainPagePromoForHomePage from "../components/getComponentCollection/getMainPagePromoForHomePage";
+
 import MainPagePromoForBrand from "../components/AddComponentCollection/MainPagePromoForBrand";
 import ShoppingDayForBrandCarousel from "../components/AddComponentCollection/ShoppingDayForBrandCarousel";
 import ShoppingDayForCategoryCarousel from "../components/AddComponentCollection/ShoppingDayForCategoryCarousel";
@@ -32,9 +37,9 @@ function Admin() {
         <Layout>
             <Sider trigger={null} collapsible>
                 
-                <img src={Diamond} className="w-100 bg-light Alsafialogo" />
+                <img src={Diamond} alt="AlSAFIA" className="w-100 bg-light Alsafialogo" />
 
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                <Menu theme="dark" mode="inline" className='overflow-auto' defaultSelectedKeys={['1']}>
                     <Menu.Item key="1">
                         <Link to={"/admin/getCategory"}>Category</Link>
                     </Menu.Item>
@@ -51,15 +56,15 @@ function Admin() {
                         <Link to={"/admin/getProduct"}>Product</Link>
                     </Menu.Item>
                     <Menu.Item key="6">
-                        <Link to={"/admin/getShoppingDayForHomePageCarousel"}>ShPageCarousel</Link>
+                        <Link to={"/admin/getShoppingDayForHomePageCarousel"}>Home Page Carousel</Link>
                     </Menu.Item>
                     <Menu.Item key="7">
-                        <Link to={"/admin/getMainPagePromoForHomePageSlider"}>PageSlider</Link>
+                        <Link to={"/admin/getMainPagePromoForHomePage"}>Home Page Promo</Link>
                     </Menu.Item>
                     <Menu.Item key="8">
-                        <Link to={"/admin/getMainPagePromoForHomePage"}>HomePage</Link>
+                        <Link to={"/admin/getMainPagePromoForHomePageSlider"}>Home Page Slider</Link>
                     </Menu.Item>
-                    <Menu.Item key="9">
+                    {/* <Menu.Item key="9">
                         <Link to={"/admin/getMainPagePromoForBrand"}>ForBrand</Link>
                     </Menu.Item>
                     <Menu.Item key="10">
@@ -73,7 +78,7 @@ function Admin() {
                     </Menu.Item>
                     <Menu.Item key="13">
                         <Link to={"/admin/getMainPagePromoForCategory"}>MainPagePromoForCategory</Link>
-                    </Menu.Item>
+                    </Menu.Item> */}
 
 
                 </Menu>
@@ -99,9 +104,14 @@ function Admin() {
                         <Route path={"/admin/addSubCategory"} component={SubCategory}/>
                         <Route path={"/admin/getSubSubCategory"} component={GetSubSubCategory}/>
                         <Route path={"/admin/addSubSubCategory"} component={SubSubCategory}/>
-                        <Route path={"/admin/getShoppingDayForHomePageCarousel"} component={ShoppingDayForHomePageCarousel}/>
-                        <Route path={"/admin/getMainPagePromoForHomePageSlider"} component={MainPagePromoForHomePageSlider}/>
-                        <Route path={"/admin/getMainPagePromoForHomePage"} component={MainPagePromoForHomePage}/>
+                        <Route path={"/admin/addShoppingDayForHomePageCarousel"} component={ShoppingDayForHomePageCarousel}/>
+                        <Route path={"/admin/getShoppingDayForHomePageCarousel"} component={GetShoppingDayForHomePageCarousel}/>
+                        <Route path={"/admin/addMainPagePromoForHomePage"} component={MainPagePromoForHomePage}/>
+                        <Route path={"/admin/getMainPagePromoForHomePage"} component={GetMainPagePromoForHomePage}/>
+                        
+
+                        <Route path={"/admin/getMainPagePromoForHomePageSlider"} component={GetMainPagePromoForHomePageSlider}/>
+                        <Route path={"/admin/addMainPagePromoForHomePageSlider"} component={MainPagePromoForHomePageSlider}/>
                         <Route path={"/admin/getMainPagePromoForBrand"} component={MainPagePromoForBrand}/>
                         <Route path={"/admin/getShoppingDayForBrandCarousel"} component={ShoppingDayForBrandCarousel}/>
                         <Route path={"/admin/getAdvertisingForCategoryMenu"} component={AdvertisingForCategoryMenu}/>

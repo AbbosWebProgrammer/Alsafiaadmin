@@ -3,8 +3,9 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 import {API} from "../../tools/constans";
 import "./css/style.css";
-function GetCategory() {
-    const [category, setCategory] = useState([]);
+import { Divider } from 'antd';
+function GetHomepPageCarusel() {
+    const [carousel, setCarusel] = useState([]);
     const [deleteItem, setDeleteItem] = useState('');
     const [item, setItem] = useState('');
     const [inputV, setInputV] = useState('');
@@ -15,8 +16,9 @@ function GetCategory() {
     const [imageList, setImageList] = useState('');
     const [isImageChoose, setIsImageChoose] = useState(false);
     useEffect(() => {
-        axios.get(API+"api/Category/").then((res) => {
-                setCategory(res.data)
+        axios.get(API+"api/ShoppingDayForHomePageCarousel/").then((res) => {
+                setCarusel(res.data)
+                console.log(res.data)
             }
         )
     }, [])
@@ -39,7 +41,7 @@ function GetCategory() {
     }
 
     function deleted() {
-        category.forEach(item => {
+        carousel.forEach(item => {
             if (item.id === deleteItem.id) {
                 axios.delete(API+`api/Category/${deleteItem.id}`)
                     .then(res => {
@@ -55,7 +57,7 @@ function GetCategory() {
     }
 
     function editCategory(id) {
-        category.forEach(item => {
+        carousel.forEach(item => {
             if (item.id === id)
                 setItem(item)
             inputCollection.categoryname = item.categoryname;
@@ -93,7 +95,7 @@ function GetCategory() {
                 'content-type': 'multipart/form-data'
             }
         }).then(res => {
-            axios.get(API+"api/Category/").then((res) => {setCategory(res.data)})
+            axios.get(API+"api/Category/").then((res) => {setCarusel(res.data)})
         })
         
         
@@ -102,32 +104,47 @@ function GetCategory() {
     return (
         <div className="getBrand">
             <div className="container">
-                <Link to={"/admin/addCategory"} className="w-100 d-flex justify-content-end">
-                    <button className="btn btn-success mb-4">Add Category</button>
+                <Link to={"/admin/addMainPagePromoForHomePage"} className="w-100 d-flex justify-content-end">
+                    <button className="btn btn-success mb-4">Add Home Page Carousel</button>
                 </Link>
                 <div className="title">
                     <div className="row nav">
-                        <div className="col-md-1 li">T/r</div>
-                        <div className="col-md-2 li">Photo</div>
-                        <div className="col-md-3 li">Name</div>
-                        <div className="col-md-4 li">Description</div>
-                        <div className="col-md-1 li">Edit</div>
-                        <div className="col-md-1 li">Delete</div>
+                        <div className="col-1 li">T/r</div>
+                        <div className="col-2 li">Photo</div>
+                        <div className="col-1 li">Name</div>
+                        <div className="col-1 li">Category</div>
+                        <div className="col-1 li">Subcategory</div>
+                        <div className="col-1 li">Subsubcategory</div>
+                        <div className="col-1 li">Brand</div>
+                        <div className="col-1 li">Edit</div>
+                        <div className="col-1 li">Delete</div>
                     </div>
                 </div>
                 <div className="menu">
-                    {category.map((item, index) => {
+                    {carousel.map((item, index) => {
                         return <div className="row nav" key={item.id}>
-                            <div className="col-md-1 nav-item">{index + 1}</div>
-                            <div className="col-md-2 nav-item"><img src={item.image} alt="logo"/></div>
-                            <div className="col-md-3 nav-item">{item.categoryname}</div>
-                            <div className="col-md-4 nav-item">{item.description}</div>
-                            <div className="col-md-1 nav-item">
+                            <div className="col-1 nav-item">{index + 1}</div>
+                            <div className="col-2 nav-item "><img className='w-100' src={item.image} alt="logo"/></div>
+                            <div className="col-1 nav-item">{item.name}</div>
+                            <div className="col-1 li">{item.category.map((cat)=>{
+                               return <div className="d-blok">{cat}<hr/></div>
+                            })
+                            }</div>
+                            <div className="col-1 li">{item.subcategory.map((cat)=>{
+                                return <div className="d-blok">{cat}<hr/></div>
+                            })}</div>
+                            <div className="col-1 li">{item.subsubcategory.map((cat)=>{
+                               return <div className="d-blok">{cat}<hr/></div>
+                            })}</div>
+                            <div className="col-1 li">{item.brand.map((cat)=>{
+                               return <div className="d-blok">{cat}<hr/></div>
+                            })}</div>
+                            <div className="col-1 nav-item">
                                 <button className="btn btn-warning" onClick={() => editCategory(item.id)}
                                         data-bs-toggle="modal" data-bs-target="#exampleModal">Edit
                                 </button>
                             </div>
-                            <div className="col-md-1 nav-item">
+                            <div className="col-1 nav-item">
                                 <button className="btn btn-danger"
                                         data-bs-toggle="modal"
                                         data-bs-target="#staticBackdrop"
@@ -214,4 +231,4 @@ function GetCategory() {
     );
 }
 
-export default GetCategory;
+export default GetHomepPageCarusel;

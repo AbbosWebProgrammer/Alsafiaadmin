@@ -11,7 +11,7 @@ function Product(props) {
     const [getBrandName, setGetBrandName] = useState([]);
     //end get request
     // starts from category and ends in status
-
+    
 //////////////////////Product/////////////////////////////////////
      const [inputValCollection, setInputValCollection] = useState({
         category: "",
@@ -117,6 +117,10 @@ const [CheckProductInfo, setCheckProdutInfo] = useState(false);
                 ...inputValCollection,
                 [e.target.name]: e.target.checked
             });
+            if (e.target.name ==="notsizeproduct" && e.target.checked===true){
+                setColorallquantity(0);
+            }
+
         }
 
     }
@@ -238,7 +242,17 @@ const [CheckProductInfo, setCheckProdutInfo] = useState(false);
             document.getElementById("color").value=''
             setColorname('');
         }
-        if(Colorallquantity!==0){
+        if (Colorprice!==0){
+            document.getElementById("Price").value=''
+            setColorprice(0);
+        }
+
+        if (Coloroldprice!==0){
+            document.getElementById("OldPrice").value=''
+            setColoroldprice(0);
+        }
+        console.log(Colorallquantity)
+        if(Colorallquantity!==0 && Colorallquantity.toString().length!==0){
             setColorallquantity(0);
             document.getElementById("colorallquantity").value=''
         }
@@ -248,8 +262,6 @@ const [CheckProductInfo, setCheckProdutInfo] = useState(false);
         setColorallquantity(0);
         setImagesList([]);
         setAddSizeQuantityCollect([]);
-
-
 
 
     }
@@ -262,7 +274,13 @@ const [CheckProductInfo, setCheckProdutInfo] = useState(false);
            console.log(inputValCollection)
            axios.post(API+'api/AddProductJson/', {"data":inputValCollection}).then(res => {
             console.log(res.data);
-        }) }
+            if (res.data['data']="OK"){
+                window.location.replace("/admin/getProduct")
+            }}
+        ) 
+        
+
+    }
 
 
 
@@ -456,9 +474,7 @@ const [CheckProductInfo, setCheckProdutInfo] = useState(false);
                                 <div className="inputText">
                                     <div>
                                         <label htmlFor="Quantity">Quantity</label>
-                                        <input type="number" id="Quantity" name="quantity" value={quantity}
-                                            onChange={SizeQuantityCollect}
-                                            placeholder="Quantity" />
+                                        <input type="number" id="Quantity" name="quantity" value={quantity} onChange={SizeQuantityCollect} placeholder="Quantity" />
                                     </div>
                                     <div className="mt-2 w-100">
                                         {size === '' || quantity === "" ?
@@ -504,16 +520,107 @@ const [CheckProductInfo, setCheckProdutInfo] = useState(false);
 
                         }
                 <hr className="w-100 d-block my-4"/>
-                {imagesList.length !==0? <button className="btn mx-5 btn-info w-25" onClick={AddProductColor}>Add Color</button> 
-                :<button className="btn mx-5 btn-info w-25" disabled>Add Color</button>}
-                <button className="btn mx-5 btn-info w-25"onClick={checkAddProductColor}>Add Color</button>
-                              
-                </div>
-          
+                {/* {inputValCollection.sameprice?
+                // notsizeproduct
+                    imagesList.length !==0 && inputValCollection.sameprice && Colorallquantity.toString().length!==0?
+                    <button className="btn mx-5 btn-info w-25" onClick={AddProductColor}>Add Color</button>
+                        :<button className="btn mx-5 btn-info w-25" disabled>Add Color</button>
+                :imagesList.length!==0 && Colorprice.toString().length!==0 && Coloroldprice.toString().length!==0 && Colorallquantity.toString().length!==0 ?
+                    <button className="btn mx-5 btn-info w-25" onClick={AddProductColor}>Add Color</button>
+                    :<button className="btn mx-5 btn-info w-25" disabled>Add Color</button>
+                } */}
 
                 
+                {inputValCollection.sameprice?
+                    inputValCollection.notsizeproduct?
+                        imagesList.length!==0 && addSizeQuantityCollect.toString().length!==0 ? 
+                                    <button className="btn mx-5 btn-info w-25" onClick={AddProductColor}>Add Color</button>
+                                    :<button className="btn mx-5 btn-info w-25" disabled>Add Color</button>
+                        :imagesList.length!==0 && Colorallquantity.toString().length!==0 && Colorallquantity!==0? 
+                            <button className="btn mx-5 btn-info w-25" onClick={AddProductColor}>Add Color</button>
+                            :<button className="btn mx-5 btn-info w-25" disabled>Add Color</button>   
+                :
+                inputValCollection.notsizeproduct?
+                        imagesList.length!==0 && addSizeQuantityCollect.toString().length!==0 && Colorprice.toString().length!==0 && Coloroldprice.toString().length!==0 && Colorprice!==0 && Coloroldprice!==0 ? 
+                                    <button className="btn mx-5 btn-info w-25" onClick={AddProductColor}>Add Color</button>
+                                    :<button className="btn mx-5 btn-info w-25" disabled>Add Color</button>
+                        :imagesList.length!==0 && Colorallquantity.toString().length!==0 && Colorallquantity!==0  && Colorprice.toString().length!==0 && Coloroldprice.toString().length!==0 && Colorprice!==0 && Coloroldprice!==0 ? 
+                            <button className="btn mx-5 btn-info w-25" onClick={AddProductColor}>Add Color</button>
+                            :<button className="btn mx-5 btn-info w-25" disabled>Add Color</button>
+                }
+
+                <button className="btn mx-5 btn-info w-25"onClick={checkAddProductColor}>Add Color</button>        
+                </div>    
             </div>
-            
+            <hr/>   
+
+            <div className="mt-2 mx-1">
+                    <div className="m-1 d-flex overflow-auto d-blok">
+                        {AllColors.map(item => {
+                            return (
+                                <div key={item.id} id={item.id}
+                                                onMouseEnter={() => {
+                                                    document.getElementById(item.id).classList.add("Imgbockhover") 
+                                                    document.getElementById(item.id).classList.add("sizebockhover")  
+                                                }}
+                                                onMouseLeave={() => { 
+                                                    document.getElementById(item.id).classList.remove("Imgbockhover")
+                                                    document.getElementById(item.id).classList.remove("sizebockhover") 
+                                                }}
+                                                onDoubleClick={() => {
+                                                    console.log(item.id)
+                                                    let prodcolor = AllColors.filter(function(jsonObject) {
+                                                        return jsonObject.id !== item.id
+                                                    });
+                                                    setAllColors(prodcolor);
+                                                }}   className="productcolorsitems"  >
+
+                                    {item.color!==''?<div>
+                                            <label className="mt-2 d-block">Color</label>
+                                            <input className="mt-2 d-block" disabled value={item.color}/>
+                                        </div>:''
+                                    }
+                                    
+                                    {item.colorallquantity!==0?
+                                    <div>
+                                        <label className="mt-2 d-block">Quantity</label>
+                                        <input className="mt-2 d-bock" disabled value={item.colorallquantity}/>
+                                    </div>
+                                    :""
+                                    }
+                                    {item.price!==0?<input className="mt-2" value={item.price}/>:""
+
+                                    }
+                                    {item.oldprice!==0?<input className="mt-2" value={item.oldprice}/>:""}
+                                    <div className="img-block d-flex w-100 mt-2 overflow-auto">
+                                        {item.images.map((imgitem) => {
+                                            return <div key={imgitem.id} id={imgitem.id}
+                                            className="border border-primary m-1" >
+                                                <img src={imgitem.data} className="box imgstyle"  alt=""/>
+                                            </div>
+                                        })}
+                                    </div>
+                                    <div className="size mt-2 overflow-auto d-flex mt-4">
+                                    {item.size.map((sizeitem) => {
+                                                return <div key={sizeitem.id} id={sizeitem.id} className="sizeCollection mt-2">
+                                                    <div>
+                                                        <label className="d-block me-3">Size</label>
+                                                        <button className="w-8  btn border-warning me-3" disabled>{sizeitem.size}</button>
+                                                    </div>
+                                                    <div>
+                                                        <label className="d-block me-3">Quantity</label>
+                                                        <button className="w-8  btn border-warning  me-3" disabled>{sizeitem.quantity}</button>
+                                                    </div>
+                                                </div>
+                                    })}
+                                    </div>
+                                
+                                </div>
+                            )})}
+                    </div>
+                
+            </div>      
+           
 
 
             <hr className="w-100 my-4"/>
@@ -693,11 +800,19 @@ const [CheckProductInfo, setCheckProdutInfo] = useState(false);
                 <label htmlFor="checkproductinfo" className="mt-4 pt-1">Malumotlariz to'g'riligiga ishonchingiz komilmi</label>
                 <input type="checkbox" checked={CheckProductInfo} id="checkproductinfo" onChange={SizeQuantityCollect} name="checkproductinfo" className=""/>
             </div>
-        {CheckProductInfo===true && inputValCollection.category!=="" &&inputValCollection.name!=='' && AllColors.length!==0?
-            <button onClick={AllProductinfo} className="btn btn-success float-end d-block p-3 mt-4 mb-2 me-5">ADD PRODUCT</button>
-            :
-            <button className="btn btn-success float-end d-block p-3 mt-4 mb-2 me-5" disabled>ADD PRODUCT</button>
+            {inputValCollection.sameprice?
+                inputValCollection.price && inputValCollection.oldprice && CheckProductInfo===true && inputValCollection.category!=="" &&inputValCollection.name!=='' && AllColors.length!==0?
+                <button onClick={AllProductinfo} className="btn btn-success float-end d-block p-3 mt-4 mb-2 me-5">ADD PRODUCT</button>
+                :
+                <button className="btn btn-success float-end d-block p-3 mt-4 mb-2 me-5" disabled>ADD PRODUCT</button>
+            
+                :CheckProductInfo===true && inputValCollection.category!=="" &&inputValCollection.name!=='' && AllColors.length!==0?
+                <button onClick={AllProductinfo} className="btn btn-success float-end d-block p-3 mt-4 mb-2 me-5">ADD PRODUCT</button>
+                :
+                <button className="btn btn-success float-end d-block p-3 mt-4 mb-2 me-5" disabled>ADD PRODUCT</button>
+
             }
+
         </div>
 
        

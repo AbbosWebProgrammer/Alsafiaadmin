@@ -81,11 +81,11 @@ function GetBrand() {
                 'content-type': 'multipart/form-data'
             }
         }).then(res => {
-            console.log(res);
+            axios.get(API+"api/Brand/").then((res) => {
+                setBrand(res.data)
+            })
         })
-        axios.get(API+"api/Brand/").then((res) => {
-            setBrand(res.data)
-        })
+        
     }
 
     function inputVal(e) {

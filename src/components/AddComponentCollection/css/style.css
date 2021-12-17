@@ -6,9 +6,9 @@
     color: black;
     font-size: 40px;
     border-radius: 20px;
-    text-shadow: 0 0 20px rgba(0,0,0,0.3);
-    
+    text-shadow: 0 0 20px rgba(0,0,0,0.3);   
 }
+
 .draggable-source--is-dragging {
     visibility: hidden;
 }
@@ -23,40 +23,38 @@ height: 115px !important;
 }
 
 
-.Imgbockhover{
-    position: relative;
-}
+.Imgbockhover{ position: relative; }
+
 .Imgbockhover::before{
     content: "";
     background-color: white;
     opacity: 0.5;
     width: 100%; 
     height: 100%;
-    position: absolute ;
-    }
+    position: absolute ; 
+}
+
 .Imgbockhover::after{
     content: "X";
-    font-size:25px;
-    font-weight:bold;
+    font-size: 25px;
+    font-weight: bold;
     background-color: red;
     color: white;
     width: 40px; 
     height: 40px;
     border-radius: 50%;
     text-align: center;
-    /* line-height: 150px; */
     position: absolute ;
-    right:calc(50% - 20px); 
-    top: calc(50% - 20px);
-    }
+    right: calc(50% - 20px); 
+    top: calc(50% - 20px);  }
 
 .sizebockhover::after{
-    font-size:13px;
+    font-size: 13px;
     width: 20px; 
     height: 20px;
-    right: 0px;; 
-    top: 0px;
-}
+    right: 0px; 
+    top: 0px; }
+
 .sizebockhover::before{
     content: "";
     background-color: white;
@@ -68,6 +66,12 @@ height: 115px !important;
 .sizebockhover::after:active{
     background-color: black;
 }
+
+
+
+
+
+
 .zIndex{
     z-index: 10;
 }
@@ -86,13 +90,11 @@ height: 115px !important;
 minheiget{
     height: 200px;
 }
-paramheight{
-    height: 60px !important;
-    width: 300px !important;
-}
-paramheightitems{
-    height: 60px !important;
-    width: 150px !important;
+
+.productcolorsitems{
+    margin-right: 10px;
+    width: 600px !important;
+
 }
 
 

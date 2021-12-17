@@ -81,10 +81,10 @@ function GetSubSubCategory(props) {
     function addEdit(id) {
         console.log(inputChange)
         axios.put(API+`api/Subsubcategory/${id}/`, inputChange).then((res) => {
-                console.log(res)
-                alert("Ma'lumot o'zgartirildi.")
-            }
-        )
+            axios.get(API+"api/Subsubcategory/").then((res) => {
+                setSubSubCategory(res.data)
+            })
+            })
     }
 
     function deleteItems(items) {
@@ -222,7 +222,7 @@ function GetSubSubCategory(props) {
                                     nomini kiriting
                                     <br/>
                                     <b className="bg-secondary p-1 px-2 mt-1 "
-                                       style={{borderRadius: "5px"}}> {deletes.subsubcategory_name} </b> uni butunlay
+                                       style={{borderRadius: "5px"}}> {deletes.subsubcategoryname} </b> uni butunlay
                                     oʻchirib tashlamoqchi ekanligingizni tasdiqlang:
                                 </h6>
 
@@ -231,7 +231,7 @@ function GetSubSubCategory(props) {
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close
                                 </button>
-                                {inputV === deletes.subsubcategory_name ?
+                                {inputV === deletes.subsubcategoryname ?
                                     <button className="btn btn-danger" onClick={DeleteSubcategory}
                                             data-bs-dismiss="modal">Delete</button> :
                                     <button className="btn btn-danger"

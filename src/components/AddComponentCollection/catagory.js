@@ -1,9 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import {Link} from "react-router-dom";
 import 'antd/dist/antd.css';
 import {API} from "../../tools/constans";
-import { Alert } from 'bootstrap';
 
 
 class Category extends React.Component {
@@ -17,7 +15,8 @@ class Category extends React.Component {
 
     render() {
 
-        const {categoryname, description, image, imgShow,response} = this.state;
+        const {categoryname, description, image, imgShow} = this.state;
+        
         const inputNameChanged = (e) => {
             this.setState({categoryname: e.target.value})
         }

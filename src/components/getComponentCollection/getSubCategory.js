@@ -52,7 +52,9 @@ function GetSubCategory(props) {
     function AddEdit() {
 
         axios.put(API+`api/Subcategory/${item.id}/`, editSubCategory).then(res => {
-            console.log(res)
+            axios.get(API+"api/Category/").then(res => {
+                setCategoryList(res.data)
+            })
         });
     }
 
